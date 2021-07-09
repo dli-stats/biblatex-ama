@@ -1,2 +1,2 @@
 # biblatex-ama
-BibLaTex AMA style 
+BibLaTex for [AMA style](https://libguides.jcu.edu.au/ama)
