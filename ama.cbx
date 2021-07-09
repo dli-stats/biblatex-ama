@@ -1,0 +1,14 @@
+\ProvidesFile{ama.cbx}[2021/07/09 v0.1 biblatex bibliography style]
+
+\RequireCitationStyle{ext-numeric}
+
+% First after last name
+\DeclareNameAlias{default}{family-given}
+
+% No punctuation inside names
+\renewcommand*{\revsdnamepunct}{}
+
+% Cite with round parenthesis
+\DeclareOuterCiteDelims{parencite}{\bibopenparen}{\bibcloseparen}
+\DeclareOuterCiteDelimsAlias{cite}{parencite}
+\DeclareInnerCiteDelims{textcite}{\bibopenparen}{\bibcloseparen}

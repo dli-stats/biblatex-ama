@@ -1,0 +1,48 @@
+\ProvidesFile{ama.bbx}[2021/07/09 v0.1 biblatex bibliography style]
+
+\RequireBibliographyStyle{numeric}
+
+\ExecuteBibliographyOptions{sorting=none, maxbibnames=6, minbibnames=3, doi=false, isbn=false, url=false, uniquename=false, uniquelist=false, giveninits=true, terseinits=true}
+
+\DeclareFieldFormat[article,inbook,incollection,inproceedings,patent,thesis,unpublished]{title}{{#1\isdot}}
+\renewbibmacro{in:}{}
+\DeclareFieldFormat{pages}{#1}
+\renewcommand*{\bibpagespunct}{\addcolon}
+
+\renewbibmacro*{journal+issuetitle}{%
+    \usebibmacro{journal}%
+    \setunit*{\addperiod\addspace}%
+    \iffieldundef{series}
+    {}
+    {\newunit
+        \printfield{series}%
+        \setunit{\addspace}}%
+    \usebibmacro{issue+date}%
+    \setunit{\addsemicolon\addspace}%
+    \printfield{volume}%
+    (\printfield{number})%
+    \setunit{\addcolon\space}%
+    \usebibmacro{issue}%
+    \newunit%
+}
+
+% Print only the year
+\renewbibmacro*{issue+date}{%
+    \printfield{year}%
+}
+
+% Remove "and" from list of authors
+\renewcommand*{\finalnamedelim}{\multinamedelim}
+
+% Bib list with num-dot format
+\DeclareFieldFormat{labelnumberwidth}{#1\adddot}
+\DeclareFieldFormat{shorthandwidth}{\mkbibparens{#1}}
+
+% Make author names Title Case
+\def\FirstLetterUppercase#1{\expandafter\FirstLetterUppercase@i#1 \@nil}
+\def\FirstLetterUppercase@i#1#2 #3\@nil{%
+  \MakeUppercase{#1}\MakeLowercase{#2}
+  \ifx\relax#3\relax\def\next@i{}\else\def\next@i{\expandafter\FirstLetterUppercase@i#3\@nil}\fi%
+  \next@i}
+
+\InitializeBibliographyStyle{\renewcommand*{\mkbibnamefamily}[1]{\FirstLetterUppercase{#1}}}
